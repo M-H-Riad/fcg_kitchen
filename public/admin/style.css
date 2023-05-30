@@ -1,0 +1,81 @@
+.img-profile {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.content-wrapper {
+  background-color: #f1f2f7;}
+.border-r{border-right:1px solid #dee2e6;}
+.l-bg-purple {
+  background: linear-gradient(135deg,#8e4cf1 0,#c554bc 100%) !important;
+  color: #fff;}
+  .l-bg-blue-dark,.card-primary:not(.card-outline) > .card-header {
+    background: linear-gradient(135deg,#289cf5,#4f8bb7) !important;
+    color: #fff;
+}
+
+.l-bg-green-dark {
+  background: linear-gradient(135deg,#23bdb8 0,#65a986 100%) !important;
+  color: #fff;
+}
+.l-bg-orange-dark{
+  background: linear-gradient(135deg,#f04e23 0,#ee6b48 100%) !important;
+  color: #fff;
+}
+
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+  background: linear-gradient(135deg,#f04e23 0,#ee6b48 100%) !important;
+}
+
+.nav-link {padding: .4rem 1rem;}
+.main-footer { color: #000; font-size: 14px;}
+.navbar-light .navbar-nav .nav-link {
+  color: #000;}
+  a {
+    color: #e83607;}
+.br-in .small-box{border-radius: 10px;}
+.br-in .small-box-footer{border-radius: 0 0 10px 10px;}
+.sidebarstyle{
+
+  background-image: url('./dist/img/bg.jpg');
+  background-position: center center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+.inner-rp{background-color: rgba(0, 13, 36, 0.84); !important; width: 100%; height:100%;}
+.nav-sidebar .nav-treeview > .nav-item > .nav-link > .nav-icon {
+  width: 1.6rem;
+  font-size: 10px;
+}
+
+.table td, .table th {
+  padding: 7px 20px;}
+.btn {padding: 3px 8px;
+  font-size: 12px;}
+ .nav-sidebar > .nav-item .nav-icon.fa, .nav-sidebar > .nav-item .nav-icon.fab, .nav-sidebar > .nav-item .nav-icon.fad, .nav-sidebar > .nav-item .nav-icon.fal, .nav-sidebar > .nav-item .nav-icon.far, .nav-sidebar > .nav-item .nav-icon.fas, .nav-sidebar > .nav-item .nav-icon.ion, .nav-sidebar > .nav-item .nav-icon.svg-inline--fa {
+      font-size: 14px;}
+
+      .nav-link {
+        padding: 5px 15px;}
+/* 
+        [type="submit"].btn {padding: 4px 8px;
+          font-size: 16px;} */
+.page-link {
+            position: relative;
+            display: block;
+            padding: 5px 10px;}
+
+.table-bordered { border: 0; border-left: 1px solid #dee2e6;}
+.table thead th {border-bottom: 0;}
+.logo{background: #fff;
+  margin: 0 !important;
+  padding: 7px 0 7px 0 !important;}
+  .logo a{display: block; margin: 0 auto;}
+  .logo a img{width: 100%;
+    height: 40px;
+    display: block;
+    margin: 0 auto;}
+    .main-footer {
+      background-color: #dee2e6;}
