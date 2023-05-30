@@ -41,7 +41,7 @@ class PermissionController extends Controller
         ]);
     
         if($validated){
-            Permission::create(['name' => $request->input('name'), 'guard_name' => 'api']);
+            return redirect()->back()->with('errors', 'Something weng wrong.');
         }
     
         return redirect()->route('permissions.index')->with('success','Permission created successfully');
