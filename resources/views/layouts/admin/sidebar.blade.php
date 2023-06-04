@@ -77,6 +77,12 @@
                   <p>Session List</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('class.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Class List</p>
+                </a>
+              </li>
             </ul>
           </li>
 

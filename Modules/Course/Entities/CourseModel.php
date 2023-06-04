@@ -5,15 +5,9 @@ namespace Modules\Course\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ClassModel extends Model
+class CourseModel extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = 'class_models';
-
-    public function sessionData()
-    {
-        return $this->belongsTo(Session::class, 'session_id', 'id');
-    }
 }
