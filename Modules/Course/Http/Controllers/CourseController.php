@@ -5,6 +5,9 @@ namespace Modules\Course\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\Course\Entities\ClassModel;
+use Modules\Course\Entities\CourseModel;
 
 class CourseController extends Controller
 {
@@ -14,7 +17,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('course::index');
+        $datas = CourseModel::all();
+        return view('course::course.index', compact('datas'));
     }
 
     /**
@@ -23,7 +27,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('course::create');
+        $classs = ClassModel::select('id', 'name')->get();
+        return view('course::course.create', compact('classs'));
     }
 
     /**
@@ -33,7 +38,38 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:course_models,name',
+            'instructor' => 'required|string',
+            'duration' => 'required|string',
+            'url' => 'required|string',
+        ]);
+        if (!$validated) {
+            return redirect()->back()->with('errors', 'Name is required and should be unique.');
+        }
+
+        DB::beginTransaction();
+
+        try {
+            CourseModel::create([
+                'name' => $request->name,
+                'class_id' => $request->class_id,
+                'instructor' => $request->instructor,
+                'duration' => $request->duration,
+                'total_class' => $request->total_class,
+                'url' => $request->url,
+                'details' => $request->details,
+            ]);
+
+            DB::commit();
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return redirect()->back()->with('errors', $e->getMessage());
+        }
+
+        return redirect()->route('course.index')->with('success', 'Data created successfully');
     }
 
     /**
@@ -43,7 +79,8 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        return view('course::show');
+        $classs = ClassModel::select('id', 'name')->get();
+        return view('course::course.show', compact('classs'));
     }
 
     /**
@@ -53,7 +90,9 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        return view('course::edit');
+        $data = CourseModel::find($id);
+        $classs = ClassModel::select('id', 'name')->get();
+        return view('course::course.edit', compact('classs', 'data'));
     }
 
     /**
@@ -64,7 +103,39 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:course_models,name, ' . $id,
+            'instructor' => 'required|string',
+            'duration' => 'required|string',
+            'url' => 'required|string',
+        ]);
+        if (!$validated) {
+            return redirect()->back()->with('errors', 'Name is required and should be unique.');
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $course = CourseModel::find($id);
+            $course->update([
+                'name' => $request->name,
+                'class_id' => $request->class_id,
+                'instructor' => $request->instructor,
+                'duration' => $request->duration,
+                'total_class' => $request->total_class,
+                'url' => $request->url,
+                'details' => $request->details,
+            ]);
+
+            DB::commit();
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return redirect()->back()->with('errors', $e->getMessage());
+        }
+
+        return redirect()->route('course.index')->with('success', 'Data updated successfully');
     }
 
     /**

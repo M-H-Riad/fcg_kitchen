@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
-Auth::routes(['register' => false]);
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/sample-table', [App\Http\Controllers\HomeController::class, 'sample_table'])->name('tables');

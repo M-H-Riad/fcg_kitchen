@@ -17,9 +17,12 @@ class CreateCourseModelsTable extends Migration
             $table->id();
             $table->integer('class_id');
             $table->string('name');
-            $table->string('details');
+            $table->string('instructor')->nullable();
+            $table->string('duration')->nullable();
+            $table->string('total_class')->nullable();
+            $table->string('details')->nullable();
             $table->string('url');
-            $table->string('status');
+            $table->string('status')->nullable()->default(1);
             $table->timestamps();
         });
     }

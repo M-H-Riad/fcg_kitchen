@@ -10,4 +10,9 @@ class CourseModel extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function classData()
+    {
+        return $this->belongsTo(ClassModel::class, 'class_id', 'id');
+    }
 }
