@@ -2,9 +2,13 @@
 
 namespace Modules\Course\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\Course\Entities\AssignCourse;
+use Modules\Course\Entities\CourseModel;
 
 class AssignCourseController extends Controller
 {
@@ -14,7 +18,10 @@ class AssignCourseController extends Controller
      */
     public function index()
     {
-        return view('course::assign-course.index');
+        $courses = CourseModel::select('id', 'name')->get();
+        $students = User::select('id', 'name')->get();
+        $datas = AssignCourse::orderBy('id', 'desc')->get();
+        return view('course::assign-course.index', compact('courses', 'students', 'datas'));
     }
 
     /**
@@ -23,7 +30,9 @@ class AssignCourseController extends Controller
      */
     public function create()
     {
-        return view('course::assign-course.create');
+        $courses = CourseModel::select('id', 'name')->get();
+        $students = User::select('id', 'name')->where('designation', 'user')->get();
+        return view('course::assign-course.create', compact('courses', 'students'));
     }
 
     /**
@@ -33,7 +42,37 @@ class AssignCourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'course_id' => 'required|integer',
+            'student_id' => 'required|integer',
+        ]);
+        if (!$validated) {
+            return redirect()->back()->with('errors', 'Please select the required field.');
+        }
+        $oldData = AssignCourse::where('course_id', $request->course_id)
+            ->where('student_id', $request->student_id)->first();
+        if ($oldData) {
+            return redirect()->back()->with('errors', 'Already assigned this course.');
+        }
+
+        DB::beginTransaction();
+
+        try {
+            AssignCourse::create([
+                'course_id' => $request->course_id,
+                'student_id' => $request->student_id,
+                'payment' => $request->payment
+            ]);
+
+            DB::commit();
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return redirect()->back()->with('errors', $e->getMessage());
+        }
+
+        return redirect()->route('assign-course.index')->with('success', 'Data created successfully');
     }
 
     /**
@@ -53,7 +92,10 @@ class AssignCourseController extends Controller
      */
     public function edit($id)
     {
-        return view('course::assign-course.edit');
+        $data = AssignCourse::find($id);
+        $courses = CourseModel::select('id', 'name')->get();
+        $students = User::select('id', 'name')->where('designation', 'user')->get();
+        return view('course::assign-course.edit', compact('data', 'courses', 'students'));
     }
 
     /**
@@ -64,7 +106,34 @@ class AssignCourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'course_id' => 'required|integer',
+            'student_id' => 'required|integer',
+        ]);
+        if (!$validated) {
+            return redirect()->back()->with('errors', 'Please select the required field.');
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $assign = AssignCourse::find($id);
+            $assign->update([
+                'course_id' => $request->course_id,
+                'student_id' => $request->student_id,
+                'payment' => $request->payment,
+                'status' => $request->status
+            ]);
+
+            DB::commit();
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return redirect()->back()->with('errors', $e->getMessage());
+        }
+
+        return redirect()->route('assign-course.index')->with('success', 'Data updated successfully');
     }
 
     /**

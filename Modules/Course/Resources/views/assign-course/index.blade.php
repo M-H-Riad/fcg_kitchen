@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Course</h1>
+            <h1 class="m-0">Assign Course</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Course list</li>
+              <li class="breadcrumb-item active">Assign Course list</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -30,8 +30,8 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Course list</h3>
-                <a href="{{ route('course.create') }}" class="btn btn-primary float-right">Create</a>
+                <h3 class="card-title">Assign Course list</h3>
+                <a href="{{ route('assign-course.create') }}" class="btn btn-primary float-right">Create</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -39,12 +39,11 @@
                   <thead>
                     <tr>
                         <th>Sl.</th>
-                        <th>Name</th>
-                        <th>Session</th>
-                        <th>Instructor</th>
-                        <th>Duration</th>
-                        <th>Total Class</th>
-                        <th>Details</th>
+                        <th>Course Name</th>
+                        <th>Student Name</th>
+                        <th>Status</th>
+                        <th>Certificate</th>
+                        <th>Payment</th>
                         <th width="100px">Action</th>
                     </tr>
                   </thead>
@@ -53,16 +52,15 @@
                     @foreach ($datas as $key => $data)
                         <tr>
                             <td>{{ ++$i }}</td>
-                            <td>{{ $data->name }}</td>
-                            <td>{{ $data->sessionData->name }}</td>
-                            <td>{{ $data->instructor }}</td>
-                            <td>{{ $data->duration }}</td>
-                            <td>{{ $data->total_class }}</td>
-                            <td>{{ $data->details }}</td>
+                            <td>{{ $data->courseData->name }}</td>
+                            <td>{{ $data->studentData->name }}</td>
+                            <td class="text-{{ ($data->status) ? "success" : "warning" }}">{{ ($data->status) ? "Active" : "Deactive" }}</td>
+                            <td>{{ ($data->certificate) ? "Yes" : "No" }}</td>
+                            <td>{{ $data->payment }}</td>
                             <td> 
-                                <a class="btn btn-primary" href="{{ route('course.edit',$data->id) }}"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-primary" href="{{ route('assign-course.edit',$data->id) }}"><i class="fas fa-edit"></i></a>
                             
-                                {!! Form::open(['method' => 'DELETE','route' => ['course.destroy', $data->id],'style'=>'display:inline', 'onclick' => 'return confirm("Are you sure you want to delete this item?");']) !!}
+                                {!! Form::open(['method' => 'DELETE','route' => ['assign-course.destroy', $data->id],'style'=>'display:inline', 'onclick' => 'return confirm("Are you sure you want to delete this item?");']) !!}
                                     {{-- {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!} --}}
                                     <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                 {!! Form::close() !!}
@@ -72,14 +70,13 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>Sl.</th>
-                    <th>Name</th>
-                    <th>Class</th>
-                    <th>Instructor</th>
-                    <th>Duration</th>
-                    <th>Total Class</th>
-                    <th>Details</th>
-                    <th width="100px">Action</th>
+                      <th>Sl.</th>
+                      <th>Course Name</th>
+                      <th>Student Name</th>
+                      <th>Status</th>
+                      <th>Certificate</th>
+                      <th>Payment</th>
+                      <th width="100px">Action</th>
                    </tr>
                   </tfoot>
                 </table>

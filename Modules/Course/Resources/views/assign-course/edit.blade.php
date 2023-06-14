@@ -34,40 +34,30 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-                {!! Form::model($data, ['method' => 'PATCH','route' => ['course.update', $data->id]]) !!}
+                {!! Form::model($data, ['method' => 'PATCH','route' => ['assign-course.update', $data->id]]) !!}
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="name">Name <span class="text-danger">*</span></label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{$data->name}}">
-                  </div>
-                  <div class="form-group">
-                    <label for="session">Session</label>
-                    <select name="session_id" id="session_id" class="form-control">
-                      <option value="">Select Session</option>
-                      @foreach ($sessions as $key => $session)
-                        <option value="{{$session->id}}" @if($session->id == $data->session_id) selected @endif>{{$session->name}}</option>
+                    <label for="class">Course <span class="text-danger">*</span></label>
+                    <select name="course_id" id="course_id" class="form-control" required>
+                      <option value="">Select course</option>
+                      @foreach ($courses as $key => $course)
+                        <option value="{{$course->id}}" @if($course->id == $data->course_id) selected @endif>{{$course->name}}</option>
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="instructor">Instructor <span class="text-danger">*</span></label>
-                    <input type="text" name="instructor" class="form-control" id="instructor" value="{{$data->instructor}}" required>
+                    <label for="student">Select Student</label>
+                    <select name="student_id" id="student_id" class="form-control">
+                      <option value="">Select student</option>
+                      @foreach ($students as $key => $student)
+                        <option value="{{$student->id}}" @if($student->id == $data->student_id) selected @endif>{{$student->name}}</option>
+                      @endforeach
+                    </select>
                   </div>
+                  
                   <div class="form-group">
-                    <label for="duration">Duration (Hours) <span class="text-danger">*</span></label>
-                    <input type="text" name="duration" class="form-control" id="duration" value="{{$data->duration}}" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="total_class">Total Class <span class="text-danger">*</span></label>
-                    <input type="text" name="total_class" class="form-control" id="total_class" value="{{$data->total_class}}" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="url">Video Url <span class="text-danger">*</span></label>
-                    <input type="text" name="url" class="form-control" id="url" value="{{$data->url}}" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="details">Details</label>
-                    <input type="text" name="details" class="form-control" id="details" value="{{$data->details}}">
+                    <label for="payment">Payment <span class="text-danger">*</span></label>
+                    <input type="text" name="payment" class="form-control" id="payment" value="0.00" required>
                   </div>
                   <div class="form-group">
                     <label for="status">Status <span class="text-danger">*</span></label>
@@ -81,7 +71,7 @@
 
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary float-right">Submit</button>
-                  <a href="{{ route('course.index') }}" class="btn btn-warning float-right mr-1">Cancel</a>
+                  <a href="{{ route('assign-course.index') }}" class="btn btn-warning float-right mr-1">Cancel</a>
                 </div>
               </form>
             </div>

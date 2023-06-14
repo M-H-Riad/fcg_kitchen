@@ -30,52 +30,42 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Create Course</h3>
+                <h3 class="card-title">Assign Course</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ route('course.store') }}" method="POST">
+              <form action="{{ route('assign-course.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="name">Name <span class="text-danger">*</span></label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
-                  </div>
-                  <div class="form-group">
-                    <label for="session">Session</label>
-                    <select name="session_id" id="session_id" class="form-control">
-                      <option value="">Select Session</option>
-                      @foreach ($sessions as $key => $session)
-                        <option value="{{$session->id}}">{{$session->name}}</option>
+                    <label for="class">Course <span class="text-danger">*</span></label>
+                    <select name="course_id" id="course_id" class="form-control" required>
+                      <option value="">Select course</option>
+                      @foreach ($courses as $key => $course)
+                        <option value="{{$course->id}}">{{$course->name}}</option>
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="instructor">Instructor <span class="text-danger">*</span></label>
-                    <input type="text" name="instructor" class="form-control" id="instructor" placeholder="Enter instructor" required>
+                    <label for="student">Select Student</label>
+                    <select name="student_id" id="student_id" class="form-control">
+                      <option value="">Select student</option>
+                      @foreach ($students as $key => $student)
+                        <option value="{{$student->id}}">{{$student->name}}</option>
+                      @endforeach
+                    </select>
                   </div>
+                  
                   <div class="form-group">
-                    <label for="duration">Duration (Hours) <span class="text-danger">*</span></label>
-                    <input type="text" name="duration" class="form-control" id="duration" placeholder="Enter duration" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="total_class">Total Class <span class="text-danger">*</span></label>
-                    <input type="text" name="total_class" class="form-control" id="total_class" placeholder="Enter total_class" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="url">Video Url <span class="text-danger">*</span></label>
-                    <input type="text" name="url" class="form-control" id="url" placeholder="Enter url" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="details">Details</label>
-                    <input type="text" name="details" class="form-control" id="details" placeholder="Enter details">
+                    <label for="payment">Payment <span class="text-danger">*</span></label>
+                    <input type="text" name="payment" class="form-control" id="payment" value="0.00" required>
                   </div>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary float-right">Submit</button>
-                  <a href="{{ route('course.index') }}" class="btn btn-warning float-right mr-1">Cancel</a>
+                  <a href="{{ route('assign-course.index') }}" class="btn btn-warning float-right mr-1">Cancel</a>
                 </div>
               </form>
             </div>
