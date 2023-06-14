@@ -45,11 +45,11 @@
                     <input type="text" name="details" class="form-control" id="details" value="{{ $class->details }}">
                   </div>
                   <div class="form-group">
-                    <label for="session">Session</label>
-                    <select name="session_id" id="session_id" class="form-control">
-                      <option value="">Select Session</option>
-                      @foreach ($sessions as $key => $session)
-                        <option value="{{$session->id}}" @if($session->id == $class->session_id) selected @endif>{{$session->name}}</option>
+                    <label for="class">Course <span class="text-danger">*</span></label>
+                    <select name="course_id" id="course_id" class="form-control" required>
+                      <option value="">Select course</option>
+                      @foreach ($courses as $key => $course)
+                        <option value="{{$course->id}}" @if($course->id == $class->course_id) selected @endif>{{$course->name}}</option>
                       @endforeach
                     </select>
                   </div>

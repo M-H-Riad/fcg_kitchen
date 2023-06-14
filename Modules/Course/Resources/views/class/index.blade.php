@@ -40,7 +40,7 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Session</th>
+                        <th>Course</th>
                         <th>Details</th>
                         <th width="280px">Action</th>
                     </tr>
@@ -51,7 +51,7 @@
                         <tr>
                             <td>{{ ++$i }}</td>
                             <td>{{ $session->name }}</td>
-                            <td>{{ $session->sessionData->name }}</td>
+                            <td>{{ $session->courseData->name }}</td>
                             <td>{{ $session->details }}</td>
                             <td> 
                                 <a class="btn btn-primary" href="{{ route('class.edit',$session->id) }}"><i class="fas fa-edit"></i></a>

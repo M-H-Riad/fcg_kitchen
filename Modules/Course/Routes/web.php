@@ -13,6 +13,8 @@
 
 // use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route;
+
+// use Modules\Course\Http\Controllers\AssignCourseController;
 // use Modules\Course\Http\Controllers\ClassController;
 // use Modules\Course\Http\Controllers\CourseController;
 // use Modules\Course\Http\Controllers\SessionController;
@@ -25,5 +27,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('session', SessionController::class);
         Route::resource('class', ClassController::class);
         Route::resource('course', CourseController::class);
+        Route::resource('assign-course', AssignCourseController::class);
     });
 });

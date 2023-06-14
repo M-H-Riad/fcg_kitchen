@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Course\Entities\ClassModel;
 use Modules\Course\Entities\CourseModel;
+use Modules\Course\Entities\Session;
 
 class CourseController extends Controller
 {
@@ -27,8 +28,9 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $classs = ClassModel::select('id', 'name')->get();
-        return view('course::course.create', compact('classs'));
+        $sessions = Session::all();
+        // $classs = ClassModel::select('id', 'name')->get();
+        return view('course::course.create', compact('sessions'));
     }
 
     /**
@@ -41,6 +43,7 @@ class CourseController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:course_models,name',
             'instructor' => 'required|string',
+            'session_id' => 'required',
             'duration' => 'required|string',
             'url' => 'required|string',
         ]);
@@ -53,7 +56,7 @@ class CourseController extends Controller
         try {
             CourseModel::create([
                 'name' => $request->name,
-                'class_id' => $request->class_id,
+                'session_id' => $request->session_id,
                 'instructor' => $request->instructor,
                 'duration' => $request->duration,
                 'total_class' => $request->total_class,
@@ -91,8 +94,8 @@ class CourseController extends Controller
     public function edit($id)
     {
         $data = CourseModel::find($id);
-        $classs = ClassModel::select('id', 'name')->get();
-        return view('course::course.edit', compact('classs', 'data'));
+        $sessions = Session::all();
+        return view('course::course.edit', compact('sessions', 'data'));
     }
 
     /**
@@ -119,7 +122,7 @@ class CourseController extends Controller
             $course = CourseModel::find($id);
             $course->update([
                 'name' => $request->name,
-                'class_id' => $request->class_id,
+                'session_id' => $request->session_id,
                 'instructor' => $request->instructor,
                 'duration' => $request->duration,
                 'total_class' => $request->total_class,

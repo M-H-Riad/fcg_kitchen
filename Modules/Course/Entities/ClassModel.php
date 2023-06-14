@@ -12,8 +12,8 @@ class ClassModel extends Model
     protected $guarded = [];
     protected $table = 'class_models';
 
-    public function sessionData()
+    public function courseData()
     {
-        return $this->belongsTo(Session::class, 'session_id', 'id');
+        return $this->belongsTo(CourseModel::class, 'course_id', 'id');
     }
 }

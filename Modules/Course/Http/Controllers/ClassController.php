@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Course\Entities\ClassModel;
+use Modules\Course\Entities\CourseModel;
 use Modules\Course\Entities\Session;
 
 class ClassController extends Controller
@@ -17,7 +18,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $sessions = ClassModel::with(['sessionData'])->get();
+        $sessions = ClassModel::with(['courseData'])->get();
         // dd($sessions);
         return view('course::class.index', compact('sessions'));
     }
@@ -28,8 +29,8 @@ class ClassController extends Controller
      */
     public function create()
     {
-        $sessions = Session::all();
-        return view('course::class.create', compact('sessions'));
+        $courses = CourseModel::all();
+        return view('course::class.create', compact('courses'));
     }
 
     /**
@@ -41,7 +42,7 @@ class ClassController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:class_models,name',
-            'session_id' => 'required|integer',
+            'course_id' => 'required|integer',
         ]);
         if (!$validated) {
             return redirect()->back()->with('errors', 'Name is required and should be unique.');
@@ -52,7 +53,7 @@ class ClassController extends Controller
         try {
             ClassModel::create([
                 'name' => $request->name,
-                'session_id' => $request->session_id,
+                'course_id' => $request->course_id,
                 'details' => $request->details,
             ]);
 
@@ -84,9 +85,9 @@ class ClassController extends Controller
      */
     public function edit($id)
     {
-        $sessions = Session::all();
+        $courses = CourseModel::all();
         $class = ClassModel::find($id);
-        return view('course::class.edit', compact('sessions', 'class'));
+        return view('course::class.edit', compact('courses', 'class'));
     }
 
     /**
@@ -99,7 +100,7 @@ class ClassController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:class_models,name, ' . $id,
-            'session_id' => 'required|integer',
+            'course_id' => 'required|integer',
         ]);
         if (!$validated) {
             return redirect()->back()->with('errors', 'Name is required and should be unique.');
@@ -110,7 +111,7 @@ class ClassController extends Controller
         try {
             $permission = ClassModel::find($id);
             $permission->name = $request->name;
-            $permission->session_id = $request->session_id;
+            $permission->course_id = $request->course_id;
             $permission->details = $request->details;
             $permission->status = $request->status;
             $permission->save();

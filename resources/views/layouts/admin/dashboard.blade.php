@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WardanTech Ltd | Dashboard</title>
+  <title>Farzana's Cuisine | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -54,7 +54,7 @@
 
 
   <footer class="main-footer">
-    <strong>Copyright &copy; 2017-2021 <a href="#">WardanTech Ltd</a>.</strong>
+    <strong>Copyright &copy; 2023-2024 <a href="https://learn.farzanaanwar.com/">Farzana's Cuisine & Gastronomy</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.1.0

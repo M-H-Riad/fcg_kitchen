@@ -62,7 +62,7 @@
           </li> --}}
 
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
@@ -78,22 +78,46 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('class.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Class List</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ route('course.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Course List</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('class.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Class List</p>
+                </a>
+              </li>
             </ul>
+          </li> --}}
+          <li class="nav-item">
+            <a href="{{ route('session.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Session List</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('course.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Course List</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('class.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Class List</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('assign-course.index') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Assign Course</p>
+            </a>
           </li>
 
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
@@ -122,7 +146,7 @@
               </li>
               
             </ul>
-          </li>
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
