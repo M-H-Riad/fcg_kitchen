@@ -60,6 +60,10 @@
                         <option value="0" @if($class->status == 0) selected @endif>Inactive</option>
                     </select>
                   </div>
+                  <div class="form-group">
+                    <label for="url">Video Url (Embaded Code) <span class="text-danger">*</span></label>
+                    <input type="text" name="url" class="form-control" id="url" value="{{$class->url}}" required>
+                  </div>
                 </div>
                 <!-- /.card-body -->
 

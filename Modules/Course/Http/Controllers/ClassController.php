@@ -43,6 +43,7 @@ class ClassController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:class_models,name',
             'course_id' => 'required|integer',
+            'url' => 'required|string',
         ]);
         if (!$validated) {
             return redirect()->back()->with('errors', 'Name is required and should be unique.');
@@ -55,6 +56,7 @@ class ClassController extends Controller
                 'name' => $request->name,
                 'course_id' => $request->course_id,
                 'details' => $request->details,
+                'url' => $request->url,
             ]);
 
             DB::commit();
@@ -101,6 +103,7 @@ class ClassController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:class_models,name, ' . $id,
             'course_id' => 'required|integer',
+            'url' => 'required|string',
         ]);
         if (!$validated) {
             return redirect()->back()->with('errors', 'Name is required and should be unique.');
@@ -112,6 +115,7 @@ class ClassController extends Controller
             $permission = ClassModel::find($id);
             $permission->name = $request->name;
             $permission->course_id = $request->course_id;
+            $permission->url = $request->url;
             $permission->details = $request->details;
             $permission->status = $request->status;
             $permission->save();

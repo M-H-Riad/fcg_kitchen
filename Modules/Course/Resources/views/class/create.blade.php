@@ -55,6 +55,10 @@
                     </select>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="url">Video Url <span class="text-danger">*</span></label>
+                  <input type="text" name="url" class="form-control" id="url" placeholder="Enter url" required>
+                </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
